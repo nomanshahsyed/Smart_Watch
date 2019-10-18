@@ -20,8 +20,7 @@ Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 
 Adafruit_BMP280 bme; // I2C
 
-long battery = 0.00;
-int battery_level_int = 0;
+int battery = 0.00;
 int temp = 0;
 
 int battery_flag = false;
@@ -45,13 +44,6 @@ void setup()
   }
 
   display.clearDisplay();
-  display.display();
-
-  display.setTextSize(3); //
-  //    display.setFont(&FreeSans12pt7b);
-  display.setTextColor(WHITE); // Draw white text
-  display.setCursor(20, 20);   //
-  display.println("NOMI");
   display.display();
 
   if (!bme.begin())
@@ -99,13 +91,11 @@ void bmp()
 void battery_level()
 {
 
-  Serial.println(analogRead(A1));
   battery = analogRead(A1) ;
-  battery = map(battery, 580, 780, 0, 100);
-  battery_level_int = battery;
+ battery = map(battery, 0, 260, 0, 100);
   display.setCursor(90, 0); //
 
-  display.print(battery_level_int);
+  display.print(battery);
   display.print(" %");
 
   display.display();
