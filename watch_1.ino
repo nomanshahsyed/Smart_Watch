@@ -20,7 +20,8 @@ Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 
 Adafruit_BMP280 bme; // I2C
 
-int battery = 0;
+long battery = 0.00;
+int battery_level_int = 0;
 int temp = 0;
 
 int battery_flag = false;
@@ -98,10 +99,11 @@ void battery_level()
   Serial.println(analogRead(A1));
   battery = ((analogRead(A1) * 4.9 * 3.3) / (1024));
   Serial.print(battery);
-  battery = map(battery, 3.2, 4.2, 0, 100);
+  battery = map(battery, 3.2, 4.2, 0.00, 100);
+  battery_level_int = battery;
   display.setCursor(90, 0); //
 
-  display.print(battery);
+  display.print(battery_level_int);
   display.print(" %");
 
   display.display();
