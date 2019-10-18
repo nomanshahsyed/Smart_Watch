@@ -96,10 +96,10 @@ void battery_level()
 {
 
   Serial.println(analogRead(A1));
-  battery = (((analogRead(A1) * 4.6 * 3.3) / 1024) / 4.20) * 100;
+  battery = ((analogRead(A1) * 4.9 * 3.3) / (1024));
   Serial.print(battery);
-
-  display.setCursor(100, 0); //
+  battery = map(battery, 3.2, 4.2, 0, 100);
+  display.setCursor(90, 0); //
 
   display.print(battery);
   display.print(" %");
