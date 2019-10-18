@@ -78,6 +78,9 @@ void setup()
     // rtc.adjust(DateTime(2019, 10, 3, 18, 5, 0));
   }
   update_millis = millis();
+  bmp();
+    battery_level();
+    datetime();
 }
 
 void bmp()
@@ -97,9 +100,8 @@ void battery_level()
 {
 
   Serial.println(analogRead(A1));
-  battery = ((analogRead(A1) * 4.9 * 3.3) / (1024));
-  Serial.print(battery);
-  battery = map(battery, 3.2, 4.2, 0.00, 100);
+  battery = analogRead(A1) ;
+  battery = map(battery, 580, 780, 0, 100);
   battery_level_int = battery;
   display.setCursor(90, 0); //
 
